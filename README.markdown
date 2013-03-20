@@ -150,3 +150,11 @@ disabled.
 
 To enable light mode simply use `chainsaw.light()` to construct your
 saw, instead of `chainsaw()`.
+
+Running tests
+============
+
+To run the tests with [expresso](http://github.com/visionmedia/expresso),
+just do:
+
+    expresso
