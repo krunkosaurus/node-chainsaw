@@ -1,23 +1,24 @@
 var traverse = require('traverse');
 var EventEmitter = require('events').EventEmitter;
 
-module.exports = Chainsaw;
-function Chainsaw (builder) {
-    var saw = Chainsaw.saw(builder, {});
+module.exports = chainsaw;
+
+function chainsaw (builder) {
+    var saw = chainsaw.saw(builder, {});
     var r = builder.call(saw.handlers, saw);
     if (r !== undefined) saw.handlers = r;
     saw.record();
     return saw.chain();
 };
 
-Chainsaw.light = function ChainsawLight (builder) {
-    var saw = Chainsaw.saw(builder, {});
+chainsaw.light = function chainsawLight (builder) {
+    var saw = chainsaw.saw(builder, {});
     var r = builder.call(saw.handlers, saw);
     if (r !== undefined) saw.handlers = r;
     return saw.chain();
 };
 
-Chainsaw.saw = function (builder, handlers) {
+chainsaw.saw = function (builder, handlers) {
     var saw = new EventEmitter;
     saw.handlers = handlers;
     saw.actions = [];
@@ -72,7 +73,7 @@ Chainsaw.saw = function (builder, handlers) {
             cb = args.shift();
         }
 
-        var s = Chainsaw.saw(builder, {});
+        var s = chainsaw.saw(builder, {});
         var r = builder.call(s.handlers, s);
 
         if (r !== undefined) s.handlers = r;
